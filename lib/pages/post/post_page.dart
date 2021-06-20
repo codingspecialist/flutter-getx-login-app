@@ -49,6 +49,15 @@ class PostPage extends StatelessWidget {
           onPressed: () {
             p.findAll();
             p.findById();
+            Get.snackbar("초기화 끝", "잘했어", snackPosition: SnackPosition.TOP);
+            Get.showSnackbar(
+              GetBar(
+                title: 'Snackbar',
+                message: 'Snackbar',
+                duration: Duration(seconds: 2),
+                snackPosition: SnackPosition.BOTTOM,
+              ),
+            );
           },
           child: Text("로드"),
         ),
