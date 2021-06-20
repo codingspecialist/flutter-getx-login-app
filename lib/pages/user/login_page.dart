@@ -3,11 +3,12 @@ import 'package:flutter_getx_app/controller/user_controller.dart';
 import 'package:flutter_getx_app/domain/user/user.dart';
 import 'package:get/get.dart';
 
-class LoginPage extends GetView<UserController> {
+class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    UserController u = Get.find();
     return Scaffold(
       body: Center(
         child: Column(
@@ -16,8 +17,7 @@ class LoginPage extends GetView<UserController> {
             Text("Login Page"),
             TextButton(
               onPressed: () async {
-                User userEntity = await controller.login("ssar", "1234");
-                print("로그인 완료 : ${userEntity.username}");
+                await u.login("ssar", "1234");
                 Get.toNamed("/home");
               },
               child: Text("로그인"),

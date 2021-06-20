@@ -1,13 +1,16 @@
 import 'package:flutter_getx_app/domain/user/user.dart';
 import 'package:flutter_getx_app/domain/user/user_repository.dart';
+import 'package:flutter_getx_app/util/jwt.dart';
 import 'package:get/get.dart';
 
 class UserController extends GetxController {
-  final user = User.origin().obs;
+  final UserRepository userRepository = UserRepository();
+  final user = User().obs;
+  final token = "".obs;
 
-  Future<User> login(String username, String password) async {
-    User userEntity = await userRepository.login(username, password);
-    user.value = userEntity;
-    return userEntity;
+  Future<void> login(String username, String password) async {
+    String token = await userRepository.login(username, password);
+    this.token.value = token;
+    jwtToken = {"Authorization": token};
   }
 }
