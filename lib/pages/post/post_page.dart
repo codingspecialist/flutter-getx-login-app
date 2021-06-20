@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_getx_app/controller/post_controller.dart';
 import 'package:flutter_getx_app/controller/user_controller.dart';
+import 'package:flutter_getx_app/domain/post/post.dart';
 import 'package:get/get.dart';
 
 class PostPage extends StatelessWidget {
@@ -8,6 +9,8 @@ class PostPage extends StatelessWidget {
   Widget build(BuildContext context) {
     UserController u = Get.find();
     PostController p = Get.find();
+    Future<Post> fPost = Get.find();
+
     return Scaffold(
       appBar: AppBar(
         title: Text("username : ${u.token}"),
@@ -15,6 +18,16 @@ class PostPage extends StatelessWidget {
       body: Scaffold(
         body: Column(
           children: [
+            FutureBuilder<Post>(
+              future: fPost,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Text("${snapshot.data!.title}");
+                } else {
+                  return CircularProgressIndicator();
+                }
+              },
+            ),
             Obx(() => Text("${p.post.value.content ?? ''}")),
             Obx(
               () => Expanded(

@@ -18,7 +18,7 @@ class LoginPage extends StatelessWidget {
             TextButton(
               onPressed: () async {
                 await u.login("ssar", "1234");
-                Get.toNamed("/home");
+                Get.toNamed("/post");
               },
               child: Text("로그인"),
             )

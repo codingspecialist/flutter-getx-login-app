@@ -8,6 +8,13 @@ class PostController extends GetxController {
   final posts = <Post>[].obs;
   final post = Post().obs;
 
+  @override
+  void onInit() {
+    super.onInit();
+    findById();
+    findAll();
+  }
+
   Future<void> findAll() async {
     List<Post> posts = await postRepository.findAll();
     this.posts.value = posts;
